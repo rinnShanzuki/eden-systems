@@ -49,6 +49,9 @@ function About() {
     const elements = document.querySelectorAll('.section-animate');
     elements.forEach(el => observer.observe(el));
 
+    return () => observer.disconnect();
+  }, []);
+
   const [order, setOrder] = useState([0, 1, 2, 3, 4, 5, 6]);
 
   const handleNext = () => setOrder(prev => [...prev.slice(1), prev[0]]);
