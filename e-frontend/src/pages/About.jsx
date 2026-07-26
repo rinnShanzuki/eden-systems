@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Rocket, ShieldCheck, Sprout, Handshake, Terminal, Server, Palette, Bot, Leaf, Globe, Lightbulb, Target, Search, Heart } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import './About.css';
@@ -50,6 +50,8 @@ function About() {
 
     return () => observer.disconnect();
   }, []);
+
+  const [activeCard, setActiveCard] = useState(null);
 
   return (
     <div className="about">
@@ -155,7 +157,12 @@ function About() {
           <div className="values-deck-wrapper pop-up">
             <div className="values-deck">
               {values.map(({ icon, title, desc }, i) => (
-                <div key={title} className="value-card-container" style={{ '--card-index': i, '--card-color': cardStyles[i].bg, '--tab-text': cardStyles[i].tabText }}>
+                <div 
+                  key={title} 
+                  className={`value-card-container ${activeCard === i ? 'is-active' : ''}`}
+                  onClick={() => setActiveCard(activeCard === i ? null : i)}
+                  style={{ '--card-index': i, '--card-color': cardStyles[i].bg, '--tab-text': cardStyles[i].tabText }}
+                >
                   <div className="value-card-pull">
                     <div className="value-card-lift">
                       <div className="value-card-inner">

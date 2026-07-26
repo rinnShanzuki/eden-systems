@@ -198,9 +198,11 @@
   perspective: 1200px;
   transform: translateX(calc(var(--card-index) * 100px));
   z-index: calc(10 - var(--card-index));
+  cursor: pointer;
 }
 
-.value-card-container:hover {
+.value-card-container:hover,
+.value-card-container.is-active {
   z-index: 50;
   transition-delay: 0.15s;
 }
@@ -218,7 +220,8 @@
   transition: transform 0.25s ease-out 0.5s;
 }
 
-.value-card-container:hover .value-card-pull {
+.value-card-container:hover .value-card-pull,
+.value-card-container.is-active .value-card-pull {
   transform: translateY(160px);
   transition: transform 0.2s ease-out 0.15s;
 }
@@ -228,7 +231,8 @@
   transition: transform 0.5s ease-out 0s;
 }
 
-.value-card-container:hover .value-card-lift {
+.value-card-container:hover .value-card-lift,
+.value-card-container.is-active .value-card-lift {
   transform: translateY(-190px);
   transition: transform 0.5s ease-out 0.35s;
 }
@@ -242,7 +246,8 @@
   transform-style: preserve-3d;
 }
 
-.value-card-container:hover .value-card-inner {
+.value-card-container:hover .value-card-inner,
+.value-card-container.is-active .value-card-inner {
   transform: rotateY(-180deg) scale(1.05);
   transition-delay: 0.35s;
 }
@@ -512,6 +517,61 @@
   .mission-visual,
   .vision-visual {
     display: none;
+  }
+  
+  /* Mobile Values Deck - Vertical Stack */
+  .values-deck {
+    width: 320px;
+    height: 750px; /* Base 420px + (6 * 55px offset) */
+    transform: translateX(0);
+    margin: 0 auto;
+  }
+
+  .value-card-container {
+    transform: translateY(calc(var(--card-index) * 55px));
+  }
+  
+  .value-card-front {
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5); /* Bottom shadow for vertical stack */
+  }
+
+  .value-card-tab-text {
+    writing-mode: horizontal-tb;
+    right: auto;
+    left: 50%;
+    top: 25px;
+    transform: translateX(-50%);
+  }
+
+  /* Disable hover animations on mobile */
+  .value-card-container:hover {
+    z-index: calc(10 - var(--card-index));
+    transition-delay: 0s;
+  }
+  .value-card-container:hover .value-card-pull,
+  .value-card-container:hover .value-card-lift {
+    transform: translateY(0);
+  }
+  .value-card-container:hover .value-card-inner {
+    transform: none;
+  }
+
+  /* Use .is-active for click animations on mobile */
+  .value-card-container.is-active {
+    z-index: 50;
+    transition-delay: 0.15s;
+  }
+  .value-card-container.is-active .value-card-pull {
+    transform: translateY(120px); /* Pull down out of the stack */
+    transition: transform 0.2s ease-out 0.15s;
+  }
+  .value-card-container.is-active .value-card-lift {
+    transform: translateY(calc(var(--card-index) * -55px)); /* Lift to the top of the stack */
+    transition: transform 0.5s ease-out 0.35s;
+  }
+  .value-card-container.is-active .value-card-inner {
+    transform: rotateY(-180deg) scale(1.05);
+    transition-delay: 0.35s;
   }
 
   .timeline-line {
