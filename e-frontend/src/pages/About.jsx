@@ -49,10 +49,54 @@ function About() {
     const elements = document.querySelectorAll('.section-animate');
     elements.forEach(el => observer.observe(el));
 
-    return () => observer.disconnect();
-  }, []);
+  const [order, setOrder] = useState([0, 1, 2, 3, 4, 5, 6]);
 
-  const [activeCard, setActiveCard] = useState(null);
+  const handleNext = () => setOrder(prev => [...prev.slice(1), prev[0]]);
+  const handlePrev = () => setOrder(prev => [prev[prev.length - 1], ...prev.slice(0, -1)]);
+
+  const getCardProps = (cardIndex) => {
+    const position = order.indexOf(cardIndex);
+    const isCenter = position === 1;
+    const isLeft = position === 0;
+    const isRight = position === 2;
+    
+    // Default hidden
+    let x = '0%';
+    let scale = 0.5;
+    let opacity = 0;
+    let zIndex = 0;
+    let rotateY = 0;
+    let pointerEvents = 'none';
+    
+    if (isCenter) {
+      x = '0%';
+      scale = 1;
+      opacity = 1;
+      zIndex = 10;
+      rotateY = 180;
+      pointerEvents = 'auto';
+    } else if (isLeft) {
+      x = '-105%';
+      scale = 0.85;
+      opacity = 1;
+      zIndex = 5;
+      rotateY = 0;
+      pointerEvents = 'auto';
+    } else if (isRight) {
+      x = '105%';
+      scale = 0.85;
+      opacity = 1;
+      zIndex = 5;
+      rotateY = 0;
+      pointerEvents = 'auto';
+    } else if (position > 2) {
+      x = '200%';
+    } else {
+      x = '-200%';
+    }
+
+    return { x, scale, opacity, zIndex, rotateY, pointerEvents, isCenter, isLeft, isRight };
+  };
 
   return (
     <div className="about">
@@ -155,52 +199,54 @@ function About() {
             title="What Drives Us"
             subtitle="Our principles are baked into every line of code and every client interaction."
           />
-          <div className="values-motion-wrapper pop-up">
-            <div className="values-grid">
-              {values.map(({ icon, title }, i) => (
-                <motion.div
-                  layoutId={`value-card-${i}`}
-                  key={title}
-                  className="value-grid-card"
-                  onClick={() => setActiveCard(i)}
-                  style={{ '--card-bg': cardStyles[i].bg, '--card-accent': cardStyles[i].tabText }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <div className="v-grid-icon">{icon}</div>
-                  <div className="v-grid-title">{title}</div>
-                </motion.div>
-              ))}
-            </div>
-
-            <AnimatePresence>
-              {activeCard !== null && (
-                <>
+          <div className="carousel-wrapper pop-up">
+            <div className="carousel-container">
+              {values.map(({ icon, title, desc }, i) => {
+                const props = getCardProps(i);
+                return (
                   <motion.div
-                    className="value-modal-overlay"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onClick={() => setActiveCard(null)}
-                  />
-                  <div className="value-modal-container" onClick={() => setActiveCard(null)}>
-                    <motion.div
-                      layoutId={`value-card-${activeCard}`}
-                      className="value-modal-card"
-                      onClick={(e) => e.stopPropagation()}
-                      style={{ '--card-bg': cardStyles[activeCard].bg, '--card-accent': cardStyles[activeCard].tabText }}
+                    key={title}
+                    className="carousel-card"
+                    animate={{ 
+                      x: props.x, 
+                      scale: props.scale, 
+                      opacity: props.opacity, 
+                      zIndex: props.zIndex 
+                    }}
+                    transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                    style={{ 
+                      '--card-bg': cardStyles[i].bg, 
+                      '--card-accent': cardStyles[i].tabText,
+                      pointerEvents: props.pointerEvents
+                    }}
+                    onClick={() => {
+                      if (props.isLeft) handlePrev();
+                      if (props.isRight) handleNext();
+                    }}
+                  >
+                    <motion.div 
+                      className="carousel-card-inner"
+                      animate={{ rotateY: props.rotateY }}
+                      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
                     >
-                      <button className="value-modal-close" onClick={() => setActiveCard(null)}>✕</button>
-                      <div className="v-modal-icon">
-                        {values[activeCard].icon}
+                      <div className="carousel-card-front">
+                        <div className="carousel-icon-front">{icon}</div>
+                        <div className="carousel-title-front">{title}</div>
                       </div>
-                      <h3 className="v-modal-title">{values[activeCard].title}</h3>
-                      <p className="v-modal-desc">{values[activeCard].desc}</p>
+                      <div className="carousel-card-back">
+                        <div className="carousel-icon-back">{icon}</div>
+                        <h3>{title}</h3>
+                        <p>{desc}</p>
+                      </div>
                     </motion.div>
-                  </div>
-                </>
-              )}
-            </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </div>
+            <div className="carousel-controls">
+              <button className="carousel-btn" onClick={handlePrev} aria-label="Previous card">←</button>
+              <button className="carousel-btn" onClick={handleNext} aria-label="Next card">→</button>
+            </div>
           </div>
         </div>
       </section>
