@@ -484,13 +484,18 @@
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .carousel-container {
+    width: 280px;
+    height: 380px;
+  }
 }
 
 @media (max-width: 768px) {
 
   .carousel-container {
-    width: 260px;
-    height: 360px;
+    width: 240px;
+    height: 340px;
   }
   
   .carousel-icon-front {
@@ -499,6 +504,14 @@
 
   .carousel-title-front {
     font-size: 1.25rem;
+  }
+  
+  .carousel-card-back h3 {
+    font-size: 1.15rem;
+  }
+  
+  .carousel-card-back p {
+    font-size: 0.85rem;
   }
 
   .mission-layout,
@@ -533,5 +546,35 @@
 
   .team-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    width: 200px;
+    height: 300px;
+  }
+  
+  .carousel-icon-front {
+    transform: scale(1);
+    margin-bottom: 1rem;
+  }
+  
+  .carousel-title-front {
+    font-size: 1.1rem;
+  }
+  
+  .carousel-card-back h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .carousel-card-back p {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+  
+  .carousel-card-back, .carousel-card-front {
+    padding: 1.25rem;
   }
 }
