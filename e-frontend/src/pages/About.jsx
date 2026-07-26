@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Rocket, ShieldCheck, Sprout, Handshake, Terminal, Server, Palette, Bot, Leaf, Globe, Lightbulb, Target, Search, Heart } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import './About.css';
@@ -16,13 +17,13 @@ const values = [
 const cardColors = ['#00b85c', '#74c947', '#b2f25a', '#fddb45', '#f6af48', '#f38848', '#f06428'];
 
 const cardStyles = [
-  { bg: '#0b160b', tabText: '#95ff38' }, // Lightest green
+  { bg: '#0b160b', tabText: '#95ff38' },
   { bg: '#122612', tabText: '#77cc2d' },
   { bg: '#1a3a19', tabText: '#5aa31f' },
-  { bg: '#255223', tabText: '#183606' }, // Crossover to dark text for contrast
+  { bg: '#255223', tabText: '#183606' },
   { bg: '#326c2e', tabText: '#102404' },
   { bg: '#438a3c', tabText: '#081202' },
-  { bg: '#58ab4e', tabText: '#000000' }, // Darkest text
+  { bg: '#58ab4e', tabText: '#000000' },
 ];
 
 const milestones = [
@@ -50,6 +51,8 @@ function About() {
 
     return () => observer.disconnect();
   }, []);
+
+  const [activeCard, setActiveCard] = useState(null);
 
   return (
     <div className="about">
@@ -152,27 +155,52 @@ function About() {
             title="What Drives Us"
             subtitle="Our principles are baked into every line of code and every client interaction."
           />
-          <div className="values-deck-wrapper pop-up">
-            <div className="values-deck">
-              {values.map(({ icon, title, desc }, i) => (
-                <div key={title} className="value-card-container" style={{ '--card-index': i, '--card-color': cardStyles[i].bg, '--tab-text': cardStyles[i].tabText }}>
-                  <div className="value-card-pull">
-                    <div className="value-card-lift">
-                      <div className="value-card-inner">
-                        <div className="value-card-front">
-                          <div className="value-card-tab-text">{title}</div>
-                        </div>
-                        <div className="value-card-back">
-                          <div className="value-icon-back">{icon}</div>
-                          <h3>{title}</h3>
-                          <p>{desc}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <div className="values-motion-wrapper pop-up">
+            <div className="values-grid">
+              {values.map(({ icon, title }, i) => (
+                <motion.div
+                  layoutId={`value-card-${i}`}
+                  key={title}
+                  className="value-grid-card"
+                  onClick={() => setActiveCard(i)}
+                  style={{ '--card-bg': cardStyles[i].bg, '--card-accent': cardStyles[i].tabText }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="v-grid-icon">{icon}</div>
+                  <div className="v-grid-title">{title}</div>
+                </motion.div>
               ))}
             </div>
+
+            <AnimatePresence>
+              {activeCard !== null && (
+                <>
+                  <motion.div
+                    className="value-modal-overlay"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setActiveCard(null)}
+                  />
+                  <div className="value-modal-container" onClick={() => setActiveCard(null)}>
+                    <motion.div
+                      layoutId={`value-card-${activeCard}`}
+                      className="value-modal-card"
+                      onClick={(e) => e.stopPropagation()}
+                      style={{ '--card-bg': cardStyles[activeCard].bg, '--card-accent': cardStyles[activeCard].tabText }}
+                    >
+                      <button className="value-modal-close" onClick={() => setActiveCard(null)}>✕</button>
+                      <div className="v-modal-icon">
+                        {values[activeCard].icon}
+                      </div>
+                      <h3 className="v-modal-title">{values[activeCard].title}</h3>
+                      <p className="v-modal-desc">{values[activeCard].desc}</p>
+                    </motion.div>
+                  </div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>
