@@ -1,0 +1,231 @@
+@import './About.css';
+/* reuse page-hero, cta-banner */
+
+.services-main {
+  background: var(--bg);
+}
+
+/* ── Service Cards ───────────────────────────────────────────────────────────── */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.srv-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 3rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  align-items: start;
+}
+
+.srv-card--green:hover {
+  border-color: var(--green);
+  box-shadow: 0 8px 48px var(--glow-green-sm);
+}
+
+.srv-card--cyan:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 8px 48px var(--glow-cyan-sm);
+}
+
+.srv-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.srv-icon {
+  margin-bottom: 0.25rem;
+}
+
+.srv-card--green .srv-icon {
+  color: var(--green);
+}
+
+.srv-card--cyan .srv-icon {
+  color: var(--cyan);
+}
+
+.srv-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+.srv-tag--green {
+  background: rgba(109, 199, 38, 0.12);
+  border: 1px solid rgba(109, 199, 38, 0.3);
+  color: var(--green);
+}
+
+.srv-tag--cyan {
+  background: rgba(0, 207, 255, 0.1);
+  border: 1px solid rgba(0, 207, 255, 0.3);
+  color: var(--cyan);
+}
+
+.srv-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.srv-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.srv-cta {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--green);
+  transition: color var(--transition);
+  margin-top: 0.5rem;
+}
+
+.srv-cta:hover {
+  color: var(--cyan);
+}
+
+.srv-card-right {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+
+.srv-features-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+  margin-bottom: 1.25rem;
+}
+
+.srv-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.srv-features li {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.srv-check {
+  color: var(--green);
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* ── Process ─────────────────────────────────────────────────────────────────── */
+.process-section {
+  background: var(--bg-2);
+}
+
+.process-track {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  position: relative;
+}
+
+.process-track::before {
+  content: '';
+  position: absolute;
+  top: 2.2rem;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: var(--gradient);
+  border-radius: 2px;
+  opacity: 0.4;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.process-step-number {
+  font-size: 1.6rem;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  position: relative;
+  z-index: 1;
+  font-size: 1rem;
+}
+
+.process-step h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.process-step p {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .srv-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .process-track {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .process-track::before {
+    display: none;
+  }
+
+  .process-step {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .process-step-number {
+    flex-shrink: 0;
+  }
+}

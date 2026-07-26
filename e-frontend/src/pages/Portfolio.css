@@ -1,0 +1,165 @@
+@import './About.css';
+
+.portfolio-main {
+  background: var(--bg);
+}
+
+/* ── Filters ─────────────────────────────────────────────────────────────────── */
+.portfolio-filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.02em;
+}
+
+.filter-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(109, 199, 38, 0.06);
+}
+
+.filter-btn--active {
+  background: var(--gradient);
+  border-color: transparent;
+  color: #000;
+}
+
+.filter-btn--active:hover {
+  color: #000;
+  background: var(--gradient);
+  border-color: transparent;
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────────── */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.project-card--green:hover {
+  transform: translateY(-6px);
+  border-color: var(--green);
+  box-shadow: 0 12px 40px var(--glow-green-sm);
+}
+
+.project-card--cyan:hover {
+  transform: translateY(-6px);
+  border-color: var(--cyan);
+  box-shadow: 0 12px 40px var(--glow-cyan-sm);
+}
+
+.project-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.project-icon {
+  margin-bottom: 0.25rem;
+}
+
+.project-card--green .project-icon {
+  color: var(--green);
+}
+
+.project-card--cyan .project-icon {
+  color: var(--cyan);
+}
+
+.project-cat {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+}
+
+.project-cat--green {
+  background: rgba(109, 199, 38, 0.1);
+  border: 1px solid rgba(109, 199, 38, 0.3);
+  color: var(--green);
+}
+
+.project-cat--cyan {
+  background: rgba(0, 207, 255, 0.1);
+  border: 1px solid rgba(0, 207, 255, 0.3);
+  color: var(--cyan);
+}
+
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.project-tag {
+  font-size: 0.74rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.portfolio-empty {
+  text-align: center;
+  padding: 4rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}

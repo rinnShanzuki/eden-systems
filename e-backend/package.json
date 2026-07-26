@@ -1,0 +1,16 @@
+{
+  "name": "e-backend",
+  "version": "1.0.0",
+  "description": "Express.js backend API for eden-web",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
