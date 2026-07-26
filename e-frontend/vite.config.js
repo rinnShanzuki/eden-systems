@@ -7,5 +7,6 @@ export default defineConfig({
   build: {
     minify: 'esbuild',
     sourcemap: false
-  }
+  },
+  base: process.env.VITE_BASE_PATH || '/eden-systems',
 })
