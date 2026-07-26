@@ -57,6 +57,14 @@ function About() {
   const handleNext = () => setOrder(prev => [...prev.slice(1), prev[0]]);
   const handlePrev = () => setOrder(prev => [prev[prev.length - 1], ...prev.slice(0, -1)]);
 
+  // Auto-play the carousel
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setOrder(prev => [...prev.slice(1), prev[0]]);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   const getCardProps = (cardIndex) => {
     const position = order.indexOf(cardIndex);
     const isCenter = position === 1;
