@@ -79,6 +79,9 @@ function About() {
     let rotateY = 0;
     let pointerEvents = 'none';
     
+    let frontBg = '#1a1a1a';
+    let frontColor = '#6DC726';
+    
     if (isCenter) {
       x = '0%';
       scale = 1;
@@ -86,6 +89,8 @@ function About() {
       zIndex = 10;
       rotateY = 180;
       pointerEvents = 'auto';
+      frontBg = '#0a0a0a'; // Dark to match back side
+      frontColor = '#6DC726';
     } else if (isLeft) {
       x = '-105%';
       scale = 0.85;
@@ -93,6 +98,8 @@ function About() {
       zIndex = 5;
       rotateY = 0;
       pointerEvents = 'auto';
+      frontBg = '#3b7a33'; // Dark green
+      frontColor = '#0a1a08'; // Dark text
     } else if (isRight) {
       x = '105%';
       scale = 0.85;
@@ -100,13 +107,15 @@ function About() {
       zIndex = 5;
       rotateY = 0;
       pointerEvents = 'auto';
+      frontBg = '#6dc726'; // Light green
+      frontColor = '#0a1a08'; // Dark text
     } else if (position > 2) {
       x = '200%';
     } else {
       x = '-200%';
     }
 
-    return { x, scale, opacity, zIndex, rotateY, pointerEvents, isCenter, isLeft, isRight };
+    return { x, scale, opacity, zIndex, rotateY, pointerEvents, isCenter, isLeft, isRight, frontBg, frontColor };
   };
 
   return (
@@ -240,10 +249,17 @@ function About() {
                       animate={{ rotateY: props.rotateY }}
                       transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
                     >
-                      <div className="carousel-card-front">
-                        <div className="carousel-icon-front">{icon}</div>
-                        <div className="carousel-title-front">{title}</div>
-                      </div>
+                      <motion.div 
+                        className="carousel-card-front"
+                        animate={{ 
+                          backgroundColor: props.frontBg,
+                          color: props.frontColor
+                        }}
+                        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                      >
+                        <div className="carousel-icon-front" style={{ color: 'inherit' }}>{icon}</div>
+                        <div className="carousel-title-front" style={{ color: 'inherit' }}>{title}</div>
+                      </motion.div>
                       <div className="carousel-card-back">
                         <div className="carousel-icon-back">{icon}</div>
                         <h3>{title}</h3>
