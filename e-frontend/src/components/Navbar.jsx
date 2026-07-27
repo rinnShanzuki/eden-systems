@@ -48,7 +48,7 @@ function Navbar() {
         </nav>
 
         {/* CTA */}
-        <a href="/services" className="navbar-cta">Get Started</a>
+        <Link to="/inquire" className="navbar-cta" onClick={handleNavClick}>Inquire</Link>
 
         {/* Hamburger */}
         <button
@@ -75,9 +75,9 @@ function Navbar() {
             {label}
           </NavLink>
         ))}
-        <a href="/services" className="mobile-cta" onClick={handleNavClick}>
-          Get Started
-        </a>
+        <Link to="/inquire" className="mobile-cta" onClick={handleNavClick}>
+          Inquire
+        </Link>
       </div>
     </header>
   );

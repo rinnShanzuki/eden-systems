@@ -7,6 +7,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Reviews from './pages/Reviews';
+import Inquire from './pages/Inquire';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/inquire" element={<Inquire />} />
         </Routes>
       </main>
       <Footer />
