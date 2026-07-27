@@ -5,8 +5,8 @@ import SectionHeader from '../components/SectionHeader';
 import './Home.css';
 
 const stats = [
-  { value: '50+', label: 'Projects Delivered' },
-  { value: '30+', label: 'Happy Clients' },
+  { value: '35+', label: 'Projects Delivered' },
+  { value: '22+', label: 'Happy Clients' },
   { value: '3+', label: 'Years Experience' },
   { value: '99%', label: 'Client Satisfaction' },
 ];
