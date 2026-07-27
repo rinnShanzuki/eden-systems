@@ -176,7 +176,7 @@ function Services() {
           <h2>Let's Build <span className="gradient-text">Your Solution</span></h2>
           <p>Tell us what you need and we'll show you how we can make it happen.</p>
           <div className="cta-actions">
-            <a href="mailto:hello@edensystems.dev" className="btn-primary">Contact Us</a>
+            <a href="mailto:edensyst.devteam@gmail.com" className="btn-primary">Contact Us</a>
             <Link to="/portfolio" className="btn-ghost">View Portfolio</Link>
           </div>
         </div>
