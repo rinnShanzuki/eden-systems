@@ -70,7 +70,7 @@ function About() {
     const isCenter = position === 1;
     const isLeft = position === 0;
     const isRight = position === 2;
-    
+
     // Default hidden
     let x = '0%';
     let scale = 0.5;
@@ -78,10 +78,10 @@ function About() {
     let zIndex = 0;
     let rotateY = 0;
     let pointerEvents = 'none';
-    
+
     let frontBg = '#1a1a1a';
     let frontColor = '#6DC726';
-    
+
     if (isCenter) {
       x = '0%';
       scale = 1;
@@ -89,7 +89,7 @@ function About() {
       zIndex = 10;
       rotateY = 180;
       pointerEvents = 'auto';
-      frontBg = '#0a0a0a'; // Dark to match back side
+      frontBg = '#0a0a0a';
       frontColor = '#6DC726';
     } else if (isLeft) {
       x = '-105%';
@@ -227,15 +227,15 @@ function About() {
                   <motion.div
                     key={title}
                     className="carousel-card"
-                    animate={{ 
-                      x: props.x, 
-                      scale: props.scale, 
-                      opacity: props.opacity, 
-                      zIndex: props.zIndex 
+                    animate={{
+                      x: props.x,
+                      scale: props.scale,
+                      opacity: props.opacity,
+                      zIndex: props.zIndex
                     }}
                     transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-                    style={{ 
-                      '--card-bg': cardStyles[i].bg, 
+                    style={{
+                      '--card-bg': cardStyles[i].bg,
                       '--card-accent': cardStyles[i].tabText,
                       pointerEvents: props.pointerEvents
                     }}
@@ -244,14 +244,14 @@ function About() {
                       if (props.isRight) handleNext();
                     }}
                   >
-                    <motion.div 
+                    <motion.div
                       className="carousel-card-inner"
                       animate={{ rotateY: props.rotateY }}
                       transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
                     >
-                      <motion.div 
+                      <motion.div
                         className="carousel-card-front"
-                        animate={{ 
+                        animate={{
                           backgroundColor: props.frontBg,
                           color: props.frontColor
                         }}
