@@ -9,9 +9,9 @@ import './Inquire.css';
 // Template ID → EmailJS Dashboard > Email Templates
 // Public Key  → EmailJS Dashboard > Account > Public Key
 // ─────────────────────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'service_hotvav5';
+const EMAILJS_TEMPLATE_ID = 'template_zk9lw9b';
+const EMAILJS_PUBLIC_KEY  = '6KXxQF8nxDC5vZTzP';
 
 function Inquire() {
   const formRef = useRef(null);
@@ -146,6 +146,8 @@ function Inquire() {
                 </div>
 
                 <form ref={formRef} onSubmit={handleSubmit} className="inquire-form" noValidate>
+                  {/* Hidden field — passes submission timestamp to EmailJS {{time}} variable */}
+                  <input type="hidden" name="time" value={new Date().toLocaleString('en-PH', { dateStyle: 'medium', timeStyle: 'short' })} readOnly />
                   {/* Name */}
                   <div className={`form-group ${errors.name ? 'form-group--error' : ''}`}>
                     <label htmlFor="name">Full Name</label>
