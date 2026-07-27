@@ -159,7 +159,7 @@ function Services() {
           <div className="process-track">
             {process.map(({ step, title, desc }, i) => (
               <div key={step} className="process-step">
-                <div className="process-step-number gradient-text">{step}</div>
+                <div className="process-step-number">{step}</div>
                 <div className="process-step-line" />
                 <h3>{title}</h3>
                 <p>{desc}</p>
