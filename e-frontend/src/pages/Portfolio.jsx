@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Store, Bot, Calendar, LineChart, Package, ShoppingCart, Smartphone, FileText, Users } from 'lucide-react';
 import SectionHeader from '../components/SectionHeader';
 import './Portfolio.css';
@@ -188,8 +189,8 @@ function Portfolio() {
           <h2>Want to See Your Project <span className="gradient-text">Here?</span></h2>
           <p>Let's build something you'll be proud of. Reach out and let's talk.</p>
           <div className="cta-actions">
-            <a href="mailto:hello@edensystems.dev" className="btn-primary">Start a Project</a>
-            <a href="/services" className="btn-ghost">Our Services</a>
+            <a href="mailto:edensyst.devteam@gmail.com" className="btn-primary">Start a Project</a>
+            <Link to="/services" className="btn-ghost">Our Services</Link>
           </div>
         </div>
       </section>
